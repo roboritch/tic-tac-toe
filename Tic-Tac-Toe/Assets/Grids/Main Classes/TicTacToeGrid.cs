@@ -23,6 +23,11 @@ public class TicTacToeGrid : MonoBehaviour {
 		superGrid = parentGrid;
 		gridNumber = assignedNumber;
 		spaceImage = GetComponent<Image>();
+		for (int i = 0; i < 9; i++) {
+			gameState[i] = GridValues.empty;
+		}
+		initHidenObjects();
+		displaySmallGrid();
 	}
 	#endregion
 
@@ -37,11 +42,7 @@ public class TicTacToeGrid : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		for (int i = 0; i < 9; i++) {
-			gameState[i] = GridValues.empty;
-		}
 
-		//TODO: init grid and buttons
 	}
 
 	#region display Marker For Super Grid
@@ -88,18 +89,29 @@ public class TicTacToeGrid : MonoBehaviour {
 	//must be initalized 
 	[SerializeField] //TODO init in unity
 	private GameObject[] markerImages = new GameObject[9];
+	private IHide[] gridBitsToHide;
+	private void initHidenObjects() {
+		gridBitsToHide = gameObject.GetComponentsInChildren<IHide>();
+	}
+
 	public void displaySmallGrid() {
 		for (int i = 0; i < 9; i++) {
 			markerImages[i].SetActive(true);
-			markerImages[i].GetComponent<Image>().sprite =  getSpriteForState(gameState[i]);
+			markerImages[i].GetComponent<Image>().sprite =  getSpriteForState(gameState[i]); //set to proper image
+		}
+		foreach (var item in gridBitsToHide) {
+			item.show();
 		}
 	}
+
 
 	private void hideSmallGrid() {
 		for (int i = 0; i < 9; i++) {
 			markerImages[i].SetActive(false);
 		}
-
+		foreach (var item in gridBitsToHide) {
+			item.hide();
+		}
 	}
 
 	public enum GridValues {

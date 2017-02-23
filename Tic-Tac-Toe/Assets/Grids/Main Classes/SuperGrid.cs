@@ -14,7 +14,8 @@ public class SuperGrid : MonoBehaviour {
 	private static int numbSpaces = 9;
 	private TicTacToeGrid[] games = new TicTacToeGrid[numbSpaces]; //spaces are bottem left to top right
 	private bool[] gameWonState = new bool[numbSpaces];
-	private GameObject[] subGameAlingments = new GameObject[9]; //TODO initaize alingments
+	[SerializeField]
+	private GameObject[] subGameAlingments = new GameObject[9];
 
 	/// <summary>
 	/// creates the 9 game grids from the prefab and places them in games
@@ -25,7 +26,7 @@ public class SuperGrid : MonoBehaviour {
 			games[x] = Instantiate(ticGrid).GetComponent<TicTacToeGrid>();
 			games[x].initSpace(this, x);
 			games[x].transform.SetParent(subGameAlingments[x].transform);
-
+			games[x].transform.localPosition = new Vector3(); // center the grid space on it's parent
 			
 		}
 	}
