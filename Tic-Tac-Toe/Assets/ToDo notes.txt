@@ -1,1 +1,1 @@
-create empties marking the positions of the sub grids
+Set the current player and setup a refrance to the SuperGrid

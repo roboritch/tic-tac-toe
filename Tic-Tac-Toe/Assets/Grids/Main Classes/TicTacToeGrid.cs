@@ -20,6 +20,7 @@ public class TicTacToeGrid : MonoBehaviour {
 	/// <param name="parentGrid"></param>
 	/// <param name="assignedNumber"></param>
 	public void initSpace(SuperGrid parentGrid, int assignedNumber) {
+		button = GetComponent<Button>();
 		superGrid = parentGrid;
 		gridNumber = assignedNumber;
 		spaceImage = GetComponent<Image>();
@@ -40,10 +41,44 @@ public class TicTacToeGrid : MonoBehaviour {
 		return gameState;
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
+	///  <param name="player">true for O false for X</param>
+	/// <param name="space"></param>
+	/// <returns>true if succsess fails if space is not empty</returns>
+	public bool setGameState(int space,bool player) {
+		if(gameState[space] == GridValues.empty) {
+			if (player) {
+				gameState[space] = GridValues.o;
+			}else {
+				gameState[space] = GridValues.x;
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 
 	}
+
+	#region button call setup
+	private Button button;
+	public void setButtonToZoom() {
+		button.onClick.RemoveAllListeners();
+		button.onClick.AddListener(_ZoomButtonCall);
+	}
+
+	public void setButtonToPlaceMarker(UnityEngine.Events.UnityAction<int> placeMarkerMethod) { //TODO have SuperGrid call this when zooming in
+		button.onClick.RemoveAllListeners();
+		button.onClick.AddListener(delegate { placeMarkerMethod(gridNumber); });
+	}
+
+
+	#endregion
 
 	#region display Marker For Super Grid
 	[SerializeField]
@@ -87,7 +122,7 @@ public class TicTacToeGrid : MonoBehaviour {
 	}
 
 	//must be initalized 
-	[SerializeField] //TODO init in unity
+	[SerializeField]
 	private GameObject[] markerImages = new GameObject[9];
 	private IHide[] gridBitsToHide;
 	private void initHidenObjects() {

@@ -14,11 +14,16 @@ public class SuperGrid : MonoBehaviour {
 	private static int numbSpaces = 9;
 	private TicTacToeGrid[] games = new TicTacToeGrid[numbSpaces]; //spaces are bottem left to top right
 	private bool[] gameWonState = new bool[numbSpaces];
+
+	#region main unity refrances
 	[SerializeField]
 	private GameObject[] subGameAlingments = new GameObject[9];
+	[SerializeField]
+	private CurrentPlayer currentPlayerHandler;
+	#endregion
 
 	/// <summary>
-	/// creates the 9 game grids from the prefab and places them in games
+	/// creates the 9 game grids from the prefab and places them in the game world games
 	/// </summary>
 	private void spawnGameGrids() {
 		for (int x = 0; x < numbSpaces; x++) {
@@ -27,8 +32,11 @@ public class SuperGrid : MonoBehaviour {
 			games[x].initSpace(this, x);
 			games[x].transform.SetParent(subGameAlingments[x].transform);
 			games[x].transform.localPosition = new Vector3(); // center the grid space on it's parent
-			
 		}
+	}
+
+	public void placeMarker() {
+		//call setGameState from tic tac toe
 	}
 
 
@@ -57,6 +65,7 @@ public class SuperGrid : MonoBehaviour {
 	public void zoomOnGameGrid(int gameNumber) {
 		for (int i = 0; i < numbSpaces; i++) {
 			games[i].displayMarker(games[gameNumber].getGameState()[i]);
+			games[i].setButtonToPlaceMarker();
 		}
 	}
 
