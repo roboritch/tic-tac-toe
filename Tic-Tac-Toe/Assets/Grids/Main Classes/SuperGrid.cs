@@ -35,8 +35,14 @@ public class SuperGrid : MonoBehaviour {
 		}
 	}
 
-	public void placeMarker() {
+	/// <summary>
+	/// place a marker on a subgrid 
+	/// </summary>
+	/// <param name="spaceNumber">indexed from 0, bottem left to top right</param>
+	public void placeSubGridMarker(int spaceNumber) {
 		//call setGameState from tic tac toe
+		
+
 	}
 
 
@@ -65,12 +71,17 @@ public class SuperGrid : MonoBehaviour {
 	public void zoomOnGameGrid(int gameNumber) {
 		for (int i = 0; i < numbSpaces; i++) {
 			games[i].displayMarker(games[gameNumber].getGameState()[i]);
-			games[i].setButtonToPlaceMarker();
+			games[i].setButtonToPlaceMarker(placeSubGridMarker);
 		}
+		gameZoomed = gameNumber;
 	}
 
 	private void unZoom() {
-		
+		for (int i = 0; i < numbSpaces; i++) {
+			games[i].displaySmallGrid();
+			games[i].setButtonToZoom();
+		}
+		gameZoomed = -1;
 	}
 	#endregion
 
