@@ -29,10 +29,11 @@ public class TicTacToeGrid : MonoBehaviour {
 		}
 		initHidenObjects();
 		displaySmallGrid();
+		setButtonToZoom();
 	}
 	#endregion
 
-	private GridValues[] gameState = new GridValues[9];
+	private GridValues[] gameState = new GridValues[9];	
 	/// <summary>
 	///
 	/// </summary>
@@ -42,7 +43,7 @@ public class TicTacToeGrid : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// 
+	/// true if succsess fails if space is not empty
 	/// </summary>
 	///  <param name="player">true for O false for X</param>
 	/// <param name="space"></param>

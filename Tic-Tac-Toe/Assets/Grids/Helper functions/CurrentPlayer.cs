@@ -14,6 +14,11 @@ public class CurrentPlayer : MonoBehaviour {
 	[SerializeField]
 	private Sprite xPlayer, oPlayer;
 
+
+
+	public bool getCurrentPlayer() {
+		return currentPlayer;
+	}
 	/// <summary>
 	/// changes the current player
 	/// </summary>

@@ -41,8 +41,12 @@ public class SuperGrid : MonoBehaviour {
 	/// <param name="spaceNumber">indexed from 0, bottem left to top right</param>
 	public void placeSubGridMarker(int spaceNumber) {
 		//call setGameState from tic tac toe
-		
-
+		if (games[gameZoomed].setGameState(spaceNumber, currentPlayerHandler.getCurrentPlayer())) {
+			currentPlayerHandler.changePlayer();
+			unZoom();
+		} else {
+			Debug.Log("space not empty");
+		}
 	}
 
 
