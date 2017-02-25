@@ -1,1 +1,1 @@
-Set the current player and setup a refrance to the SuperGrid
+Everything is done for assignment 4. Look things over and add enything you think is missing
