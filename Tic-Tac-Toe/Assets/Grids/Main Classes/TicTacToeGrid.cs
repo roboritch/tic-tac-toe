@@ -130,7 +130,10 @@ public class TicTacToeGrid : MonoBehaviour {
 		gridBitsToHide = gameObject.GetComponentsInChildren<IHide>();
 	}
 
+	[SerializeField]
+	private Sprite mask; // mask to be all alpha
 	public void displaySmallGrid() {
+		spaceImage.sprite = mask;
 		for (int i = 0; i < 9; i++) {
 			markerImages[i].SetActive(true);
 			markerImages[i].GetComponent<Image>().sprite =  getSpriteForState(gameState[i]); //set to proper image

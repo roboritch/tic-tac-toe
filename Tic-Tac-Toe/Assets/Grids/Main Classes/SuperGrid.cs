@@ -96,6 +96,20 @@ public class SuperGrid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown(KeyCode.Z)) {
+			unZoom();
+		}
+
+		//keybord input for game grid
+		for (int i = 0; i < numbSpaces; i++) {
+			if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyDown(KeyCode.Alpha1 + i)) {
+				if (gameZoomed != -1) {
+					placeSubGridMarker(i);
+				} else {
+					zoomOnGameGrid(i);
+				}
+			}
+		}
+
 	}
 }
